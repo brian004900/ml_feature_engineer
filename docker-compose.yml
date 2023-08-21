@@ -1,0 +1,26 @@
+version: "3.2"
+services:
+  db:
+    image: mariadb
+    container_name: mydb
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes:
+      - .data:/config
+    environment:
+
+      MARIADB_ROOT_PASSWORD: #put your password
+      MYSQL_ROOT_HOST: "%"
+      PUID: 501
+      PGID: 20
+    ports:
+      - 3307:3306
+
+  baseball:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: baseball
+    restart: on-failure
+    volumes:
+      - ./share:/share

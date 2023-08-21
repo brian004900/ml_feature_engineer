@@ -1,0 +1,13 @@
+numpy
+pandas
+plotly
+scikit-learn
+pyspark
+pyspark-stubs
+statsmodels
+matplotlib
+seaborn
+pycorr
+kaleido
+mariadb == 1.0.8
+sqlalchemy
