@@ -117,7 +117,7 @@ Removing highly correlated features can reduce noise and increase the quality of
 ## Brute Force
 When two features have a certain correlation, I will observe the brute force plot. Take the home team batting average and away team batting average as examples, from their brute force pattern we can observe that when one value is high, the other value is low. At this time, I will subtract these two features.
 
-<img src="https://github.com/brian004900/ml_feature_engineer/blob/final/image/battingavg.png" width="700"/>
+<img src="https://github.com/brian004900/ml_feature_engineer/blob/main/image/battingavg.png" width="700"/>
 
 I used this method to create 20 more new features, and among the 20, 17 achieved good results. The feature names I created start with diff, from the next [session](#Random-Forest-Ranking-and-p- value), it can be found that these features perform well in random forest importance. In the original data without removing any features, their values are higher than the average, and even the p-value of several features is also lower than 0.05. Although the final performance of these features is not obvious, but the accuracy of all models There is indeed a slight improvement, especially logistic regression.
 
