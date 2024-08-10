@@ -70,7 +70,7 @@ Most of the features are created based on Wikipedia's [baseball statistics](http
 
 In terms of the added feature, I think that the number of pitcher substitutions will affect the outcome of the game, so I built a pitcher substitution predictor. In most cases, if the number of pitcher substitutions is high, it is likely to represent the poor performance of the team's pitchers and thus affect the team's performance. The event column in the inning action records each "pitcher substitution". 
 
-<img src="https://github.com/brian004900/ml_feature_engineer/blob/final/image/pitch%20substitute.png" width="700"/>
+<img src="https://github.com/brian004900/ml_feature_engineer/blob/main/image/pitch%20substitute.png" width="700"/>
 
 Although the performance of this predictor is not good, whether it is in p-value or random forest importance, we can find from the predictor/response plot that indeed as the number of pitcher substitutions increases, the team loses more games than wins There are many sessions.
 
@@ -101,16 +101,16 @@ FROM team_results T1);
 ``` 
 But I found that even if the victory or loss of the day is deducted, using the above SQL script to calculate the winning streak will still make the table maintain a pattern so that the predictor can know the future, I can say it is cheating. From the table below, we can know how many consecutive victories before playing the game. When the team ends losing or winning, the winning or losing streak ends and recounts! This is what causes cheating.
 
-<img src="https://github.com/brian004900/ml_feature_engineer/blob/final/image/streak_cheat.png" width="700"/>
+<img src="https://github.com/brian004900/ml_feature_engineer/blob/main/image/streak_cheat.png" width="700"/>
 
 I added the feature of temperature after the presentation. I think that overheating temperature will affect the team's performance. I first used the temperature of the day because I think it is very accurate in terms of the current weather forecast. Using this predictor, the random forest The accuracy rate increased by 2% to 3%. However, this is still cheating so I finally decided to calculate the average temperature of the previous 10 days, and this predictor still achieves good results.
 
-<img src="https://github.com/brian004900/ml_feature_engineer/blob/final/image/temprf.png" width="700"/>
+<img src="https://github.com/brian004900/ml_feature_engineer/blob/main/image/temprf.png" width="700"/>
 
-<img src="https://github.com/brian004900/ml_feature_engineer/blob/final/image/tempmean.png" width="700"/>
+<img src="https://github.com/brian004900/ml_feature_engineer/blob/main/image/tempmean.png" width="700"/>
 
 ## Correlation
-<img src="https://github.com/brian004900/ml_feature_engineer/blob/final/image/corr.png" width="700"/>
+<img src="https://github.com/brian004900/ml_feature_engineer/blob/main/image/corr.png" width="700"/>
 
 Removing highly correlated features can reduce noise and increase the quality of the model. I have removed many features so that the correlation between the two features will not be higher than 90%. Before removing the feature, I will first observe brute force to determine whether the brute force plot has a particulate pattern to experiment with new features. Then, I will decide which features to remove based on p-value and random forest importance.
 
@@ -124,9 +124,9 @@ I used this method to create 20 more new features, and among the 20, 17 achieved
 ## Random Forest Ranking and p-value
 Finally, I remove more features based on random forest importance and p-value. The principle of removal is to satisfy both when the p-value is higher than 0.05 and the value of the random forest is relatively unimportant. The following charts are the random forest importance plot and p-value of all the features I finally decided to use.
 
-<img src="https://github.com/brian004900/ml_feature_engineer/blob/final/image/rf.png" width="700"/>
+<img src="https://github.com/brian004900/ml_feature_engineer/blob/main/image/rf.png" width="700"/>
 
-<img src="https://github.com/brian004900/ml_feature_engineer/blob/final/image/ftable.png" width="700"/>
+<img src="https://github.com/brian004900/ml_feature_engineer/blob/main/image/ftable.png" width="700"/>
 
 ## Rolling Average
 In the rolling average part, according to the original 100 days of work, the accuracy of my random forest is less than 50%. When adjusted for 10 days, the average accuracy increased by 3% to 5%. The reason comes from the recent team performance, including the team list, which can better reflect the current state of the team, so the prediction will be more accurate. Additionally, I looked at the data and found that the same two teams have a high probability of back-to-back games on different days, which leads to overwhelming teams winning back-to-back. The 10-day rolling average can better reflect the relationship between teams than the 100-day rolling average, so it can improve the prediction accuracy.
@@ -136,7 +136,7 @@ All predictions are sequential, and future predictions must be based on past his
 
 ## Models
 
-<img src="https://github.com/brian004900/ml_feature_engineer/blob/final/image/model.png" width="700"/>
+<img src="https://github.com/brian004900/ml_feature_engineer/blob/main/image/model.png" width="700"/>
 
 To sum up, after feature engineering and adjustment, the accuracy of logistic regression has the most obvious increase, the value is nearly 10%, and the final accuracy is also close to 55%. The accuracy of random forest cannot perform better because no decisive feature has been created. According to [F-score](https://en.wikipedia.org/wiki/F-score), logistic regression is indeed more stable.
 
